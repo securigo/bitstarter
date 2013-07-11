@@ -36,7 +36,7 @@ var assertFileExists = function(infile) {
     }
     return instr;
 };
-
+var itzik ='moty'
 var cheerioHtmlFile = function(htmlfile) {
     return cheerio.load(fs.readFileSync(htmlfile));
 };
