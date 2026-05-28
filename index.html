@@ -1,102 +1,285 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
-    <meta charset="utf-8">
-    <title>My First Bitstarter</title>
-    <link type="text/css" rel="stylesheet" 
-          href="https://d396qusza40orc.cloudfront.net/startup%2Fcode%2Fbootstrap-2.3.2.css">
-    <style type="text/css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Moty Yacov's terminal-themed personal website at yacov.co.il." />
+    <meta name="theme-color" content="#020617" />
+    <title>Moty Yacov // yacov.co.il</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              phosphor: '#39ff14',
+              matrix: '#00d084',
+              terminal: '#030712',
+              warning: '#facc15'
+            },
+            fontFamily: {
+              mono: ['JetBrains Mono', 'Fira Code', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace']
+            },
+            boxShadow: {
+              glow: '0 0 40px rgba(57, 255, 20, 0.18)',
+              insetGlow: 'inset 0 0 32px rgba(57, 255, 20, 0.08)'
+            },
+            keyframes: {
+              scan: {
+                '0%': { transform: 'translateY(-100%)' },
+                '100%': { transform: 'translateY(100vh)' }
+              },
+              flicker: {
+                '0%, 100%': { opacity: '1' },
+                '50%': { opacity: '.82' },
+                '52%': { opacity: '.98' },
+                '55%': { opacity: '.74' },
+                '57%': { opacity: '.96' }
+              },
+              blink: {
+                '0%, 49%': { opacity: '1' },
+                '50%, 100%': { opacity: '0' }
+              }
+            },
+            animation: {
+              scan: 'scan 7s linear infinite',
+              flicker: 'flicker 5s infinite',
+              blink: 'blink 1s step-end infinite'
+            }
+          }
+        }
+      };
+    </script>
+    <style>
+      :root { color-scheme: dark; }
       body {
-        padding-top: 20px;
-        padding-bottom: 40px;
+        background:
+          radial-gradient(circle at top left, rgba(57, 255, 20, 0.12), transparent 32rem),
+          radial-gradient(circle at bottom right, rgba(0, 208, 132, 0.1), transparent 28rem),
+          #030712;
       }
-      .container {
-        width: 960px;
+      .crt::before {
+        content: '';
+        pointer-events: none;
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        background: repeating-linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.025) 0,
+          rgba(255, 255, 255, 0.025) 1px,
+          transparent 1px,
+          transparent 4px
+        );
+        mix-blend-mode: screen;
       }
-      p.lead {
-        padding-top: 15px;
+      .crt::after {
+        content: '';
+        pointer-events: none;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 28vh;
+        z-index: 51;
+        background: linear-gradient(to bottom, transparent, rgba(57, 255, 20, 0.08), transparent);
+        animation: scan 7s linear infinite;
       }
-      .navigation, .pitch, .section1, .section2, .faq, .footer {
-        padding: 10px 0px 10px 0px;
-      }
-      .video, .thermometer, .order, .social {
-        border: 1px dotted;
-        text-align: center;
-      }
-      .video {
-        /* Internal borders have 1px width, thus need to add 4 x 1px to 120px. */
-        height: 124px;
-        line-height: 124px;
-      }
-      .thermometer, .order, .social {
-        /* line-height to vertically center: http://phrogz.net/css/vertical-align/index.html */
-        height: 40px;
-        line-height: 40px;
-      }
-      div.row {
-        border: 1px solid;
+      .terminal-text { text-shadow: 0 0 10px rgba(57, 255, 20, .48); }
+      .glass-terminal { backdrop-filter: blur(18px); }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
       }
     </style>
   </head>
-  <body>
-    <div class="container">
-      <div class="row navigation">
-        <div class="span2 logo">
-          Logo
-        </div>
-        <div class="span6 blank">
-          Blank
-        </div>
-        <div class="span4 about">
-          About
-        </div>
-      </div>
-      <div class="row heading">
-        <div class="span12">
-          <h1>Bitstarter Title</h1>
-        </div>
-      </div> 
-     <div class="row subheading">
-        <div class="span12">
-          <p class="lead">This is my first bitstarter project.</p>
-        </div>
-      </div>
-      <div class="row pitch">
-        <div class="span6 video">
-          Video
-        </div>
-        <div class="span6">
-          <div class="thermometer">
-            Thermometer
-          </div>
-          <div class="order">
-            Order
-          </div>
-          <div class="social">
-            Social
-          </div>
-        </div>
-      </div>
-      <div class="row section1">
-        <div class="span12">
-          Marketing Section 1
-        </div>
-      </div>
-      <div class="row section2">
-        <div class="span12">
-          Marketing Section 2
-        </div>
-      </div>
-      <div class="row faq">
-        <div class="span12">
-          FAQ
-        </div>
-      </div>
-      <div class="row footer">
-        <div class="span12">
-          Footer
-        </div>
-      </div>
+  <body class="crt min-h-screen overflow-x-hidden font-mono text-green-100 selection:bg-phosphor selection:text-black">
+    <div class="fixed inset-0 -z-10 opacity-30" aria-hidden="true">
+      <div class="absolute inset-0 bg-[linear-gradient(rgba(57,255,20,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(57,255,20,0.08)_1px,transparent_1px)] bg-[size:52px_52px]"></div>
     </div>
+
+    <header class="mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-5 text-sm text-green-200/80 md:px-8">
+      <a href="#top" class="group inline-flex items-center gap-3" aria-label="Moty Yacov home">
+        <span class="grid h-9 w-9 place-items-center rounded border border-phosphor/50 bg-black/70 text-phosphor shadow-glow">MY</span>
+        <span class="terminal-text hidden sm:block">yacov.co.il</span>
+      </a>
+      <nav class="hidden items-center gap-6 md:flex" aria-label="Primary navigation">
+        <a class="hover:text-phosphor" href="#services">Services</a>
+        <a class="hover:text-phosphor" href="#process">Process</a>
+        <a class="hover:text-phosphor" href="#terminal">Terminal</a>
+        <a class="hover:text-phosphor" href="#contact">Contact</a>
+      </nav>
+      <a href="mailto:moty@yacov.co.il" class="rounded-full border border-phosphor/40 px-4 py-2 text-phosphor shadow-glow transition hover:bg-phosphor hover:text-black">CONNECT</a>
+    </header>
+
+    <main id="top">
+      <section class="mx-auto grid min-h-[calc(100vh-84px)] w-full max-w-7xl items-center gap-10 px-5 pb-16 pt-8 md:grid-cols-[1.05fr_.95fr] md:px-8">
+        <div class="space-y-8">
+          <div class="inline-flex items-center gap-2 rounded-full border border-phosphor/30 bg-black/60 px-4 py-2 text-xs uppercase tracking-[.35em] text-phosphor shadow-glow">
+            <span class="h-2 w-2 animate-pulse rounded-full bg-phosphor"></span>
+            Secure personal node online
+          </div>
+          <div class="space-y-5">
+            <p class="text-sm uppercase tracking-[.45em] text-green-300/70">Moty Yacov // Host</p>
+            <h1 class="terminal-text max-w-4xl text-4xl font-black leading-tight text-phosphor sm:text-6xl lg:text-7xl">
+              Terminal-grade web presence for yacov.co.il
+            </h1>
+            <p class="max-w-2xl text-lg leading-8 text-green-100/75">
+              A retro command center for Moty Yacov: fast static delivery, hacker-style aesthetics, and an interactive CLI that lets visitors explore profile, projects, and contact paths.
+            </p>
+          </div>
+          <div class="flex flex-col gap-4 sm:flex-row">
+            <a href="#terminal" class="rounded border border-phosphor bg-phosphor px-6 py-3 text-center font-bold text-black shadow-glow transition hover:-translate-y-0.5">Open terminal</a>
+            <a href="#services" class="rounded border border-green-400/40 bg-black/50 px-6 py-3 text-center text-green-100 transition hover:border-phosphor hover:text-phosphor">View profile modules</a>
+          </div>
+          <div class="grid gap-3 text-xs text-green-200/70 sm:grid-cols-3">
+            <div class="rounded border border-green-400/20 bg-black/40 p-4"><span class="text-phosphor">01</span><br />Static S3-ready files</div>
+            <div class="rounded border border-green-400/20 bg-black/40 p-4"><span class="text-phosphor">02</span><br />Responsive terminal UI</div>
+            <div class="rounded border border-green-400/20 bg-black/40 p-4"><span class="text-phosphor">03</span><br />Custom crash-screen 404</div>
+          </div>
+        </div>
+
+        <div class="glass-terminal rounded-2xl border border-phosphor/30 bg-black/70 p-4 shadow-glow shadow-insetGlow">
+          <div class="flex items-center justify-between border-b border-green-400/20 pb-3 text-xs text-green-300/70">
+            <div class="flex gap-2"><span class="h-3 w-3 rounded-full bg-red-500"></span><span class="h-3 w-3 rounded-full bg-warning"></span><span class="h-3 w-3 rounded-full bg-phosphor"></span></div>
+            <span>boot.log</span>
+          </div>
+          <pre id="boot-sequence" class="min-h-[420px] whitespace-pre-wrap pt-5 text-sm leading-7 text-green-200 terminal-text" aria-live="polite"></pre>
+        </div>
+      </section>
+
+      <section id="services" class="mx-auto w-full max-w-7xl px-5 py-20 md:px-8">
+        <div class="mb-10 max-w-3xl">
+          <p class="text-sm uppercase tracking-[.4em] text-phosphor">Services</p>
+          <h2 class="mt-3 text-3xl font-black text-green-50 md:text-5xl">Smarter personal site, built like an ops console.</h2>
+        </div>
+        <div class="grid gap-5 md:grid-cols-3">
+          <article class="rounded-2xl border border-green-400/20 bg-black/50 p-6 shadow-insetGlow transition hover:border-phosphor/60">
+            <p class="text-phosphor">// identity</p>
+            <h3 class="mt-4 text-xl font-bold text-green-50">Personal Profile</h3>
+            <p class="mt-3 text-green-100/70">A concise digital home for Moty Yacov with a memorable terminal experience and clear contact path.</p>
+          </article>
+          <article class="rounded-2xl border border-green-400/20 bg-black/50 p-6 shadow-insetGlow transition hover:border-phosphor/60">
+            <p class="text-phosphor">// interface</p>
+            <h3 class="mt-4 text-xl font-bold text-green-50">Interactive CLI</h3>
+            <p class="mt-3 text-green-100/70">Visitors can type commands such as help, about, projects, contact, uptime, clear, and whoami.</p>
+          </article>
+          <article class="rounded-2xl border border-green-400/20 bg-black/50 p-6 shadow-insetGlow transition hover:border-phosphor/60">
+            <p class="text-phosphor">// deploy</p>
+            <h3 class="mt-4 text-xl font-bold text-green-50">AWS S3 Ready</h3>
+            <p class="mt-3 text-green-100/70">Pure static HTML, Tailwind CDN styling, and a dedicated error.html page for S3 static website hosting.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="process" class="mx-auto w-full max-w-7xl px-5 py-20 md:px-8">
+        <div class="rounded-3xl border border-phosphor/20 bg-black/60 p-6 shadow-glow md:p-10">
+          <p class="text-sm uppercase tracking-[.4em] text-phosphor">Process</p>
+          <h2 class="mt-3 text-3xl font-black text-green-50 md:text-5xl">How the site initializes</h2>
+          <div class="mt-10 grid gap-4 md:grid-cols-3">
+            <div class="border-l border-phosphor/50 pl-5"><span class="text-phosphor">01</span><h3 class="mt-3 font-bold text-green-50">Boot</h3><p class="mt-2 text-sm text-green-100/70">Load retro terminal visuals and establish the yacov.co.il session.</p></div>
+            <div class="border-l border-phosphor/50 pl-5"><span class="text-phosphor">02</span><h3 class="mt-3 font-bold text-green-50">Explore</h3><p class="mt-2 text-sm text-green-100/70">Use commands to navigate Moty's profile, work areas, and contact details.</p></div>
+            <div class="border-l border-phosphor/50 pl-5"><span class="text-phosphor">03</span><h3 class="mt-3 font-bold text-green-50">Deploy</h3><p class="mt-2 text-sm text-green-100/70">Upload index.html and error.html to an S3 static website bucket.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="terminal" class="mx-auto w-full max-w-7xl px-5 py-20 md:px-8">
+        <div class="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+          <div>
+            <p class="text-sm uppercase tracking-[.4em] text-phosphor">Interactive shell</p>
+            <h2 class="mt-3 text-3xl font-black text-green-50 md:text-5xl">Type <span class="text-phosphor">help</span> to begin.</h2>
+          </div>
+          <p class="max-w-xl text-sm text-green-100/60">This is a safe browser simulation. No command leaves your device; responses are rendered client-side.</p>
+        </div>
+        <div class="glass-terminal rounded-2xl border border-phosphor/30 bg-black/80 shadow-glow">
+          <div class="flex items-center justify-between border-b border-green-400/20 px-4 py-3 text-xs text-green-300/70">
+            <span>moty@yacov:~/public_html</span>
+            <span>session: visitor</span>
+          </div>
+          <div id="terminal-output" class="h-[28rem] overflow-y-auto p-5 text-sm leading-7 text-green-100" aria-live="polite"></div>
+          <form id="terminal-form" class="flex items-center gap-2 border-t border-green-400/20 p-4">
+            <label for="terminal-input" class="shrink-0 text-phosphor">visitor@yacov:~$</label>
+            <input id="terminal-input" class="w-full bg-transparent text-green-50 caret-phosphor outline-none placeholder:text-green-700" autocomplete="off" spellcheck="false" placeholder="help" />
+            <span class="animate-blink text-phosphor">█</span>
+          </form>
+        </div>
+      </section>
+
+      <section id="contact" class="mx-auto w-full max-w-7xl px-5 pb-24 pt-12 md:px-8">
+        <div class="grid gap-6 rounded-3xl border border-green-400/20 bg-black/60 p-6 md:grid-cols-[1fr_auto] md:items-center md:p-10">
+          <div>
+            <p class="text-sm uppercase tracking-[.4em] text-phosphor">Contact</p>
+            <h2 class="mt-3 text-3xl font-black text-green-50">Ready to establish a secure connection?</h2>
+            <p class="mt-4 text-green-100/70">Use the terminal contact command or email the host directly.</p>
+          </div>
+          <a href="mailto:moty@yacov.co.il" class="rounded border border-phosphor bg-phosphor px-6 py-3 text-center font-bold text-black shadow-glow transition hover:-translate-y-0.5">moty@yacov.co.il</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-green-400/20 px-5 py-8 text-center text-xs text-green-200/50 md:px-8">
+      <p>© <span id="year"></span> Moty Yacov // yacov.co.il // static terminal build prepared for AWS S3.</p>
+    </footer>
+
+    <script>
+      const bootLines = [
+        '[ OK ] Powering phosphor display...',
+        '[ OK ] Loading yacov.co.il identity module...',
+        '[ OK ] Mounting /home/moty/profile',
+        '[ OK ] Network route established: visitor -> Moty Yacov',
+        '[ OK ] Loading command registry: help about projects contact uptime clear whoami',
+        '[ OK ] Enabling CRT scanlines and keyboard input',
+        '[READY] Welcome to Moty Yacov\'s personal terminal.'
+      ];
+
+      const commands = {
+        help: `Available commands:\n  about     Show host profile\n  projects  List current project modules\n  contact   Show contact endpoint\n  uptime    Display site status\n  whoami    Identify current session\n  clear     Clear terminal output`,
+        about: `Moty Yacov is the host of yacov.co.il.\nThis site is designed as a personal command center: minimal, fast, retro, and direct.`,
+        projects: `Project modules:\n  [static-site] Terminal-themed personal website\n  [aws-s3] Static hosting target with index.html and error.html\n  [cli-ux] Browser-based command-line interface simulation`,
+        contact: `Contact endpoint:\n  email: moty@yacov.co.il\n  domain: yacov.co.il\n  command: mail --to moty@yacov.co.il`,
+        uptime: `System status:\n  website: online\n  hosting target: AWS S3 static website\n  latency goal: low\n  aesthetic: green-on-black retro terminal`,
+        whoami: `visitor session authenticated as: guest\npermissions: read-only\nrecommended next command: about`
+      };
+
+      const bootEl = document.getElementById('boot-sequence');
+      const outputEl = document.getElementById('terminal-output');
+      const formEl = document.getElementById('terminal-form');
+      const inputEl = document.getElementById('terminal-input');
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      function typeBootLine(index = 0) {
+        if (index >= bootLines.length) return;
+        bootEl.textContent += bootLines[index] + '\n';
+        setTimeout(() => typeBootLine(index + 1), index === 0 ? 180 : 430);
+      }
+
+      function appendOutput(content, className = '') {
+        const block = document.createElement('div');
+        block.className = `whitespace-pre-wrap ${className}`;
+        block.textContent = content;
+        outputEl.appendChild(block);
+        outputEl.scrollTop = outputEl.scrollHeight;
+      }
+
+      function runCommand(raw) {
+        const command = raw.trim().toLowerCase();
+        appendOutput(`visitor@yacov:~$ ${raw}`, 'text-phosphor');
+        if (!command) return;
+        if (command === 'clear') {
+          outputEl.innerHTML = '';
+          return;
+        }
+        appendOutput(commands[command] || `Command not found: ${command}\nType "help" for available commands.`, command in commands ? 'text-green-100' : 'text-red-300');
+      }
+
+      formEl.addEventListener('submit', (event) => {
+        event.preventDefault();
+        runCommand(inputEl.value);
+        inputEl.value = '';
+      });
+
+      typeBootLine();
+      appendOutput('Moty Yacov terminal initialized. Type "help" and press Enter.', 'text-green-300');
+    </script>
   </body>
 </html>
