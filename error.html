@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#000000" />
+    <title>404 // Kernel Panic // yacov.co.il</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { phosphor: '#39ff14', danger: '#ff3131' },
+            fontFamily: { mono: ['JetBrains Mono', 'Fira Code', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'] },
+            boxShadow: { redGlow: '0 0 42px rgba(255, 49, 49, .25)' },
+            keyframes: { blink: { '0%, 49%': { opacity: '1' }, '50%, 100%': { opacity: '0' } } },
+            animation: { blink: 'blink 1s step-end infinite' }
+          }
+        }
+      };
+    </script>
+    <style>
+      body {
+        background:
+          repeating-linear-gradient(to bottom, rgba(255, 49, 49, 0.05) 0 1px, transparent 1px 4px),
+          radial-gradient(circle at center, rgba(255, 49, 49, 0.12), transparent 34rem),
+          #000;
+      }
+      .panic { text-shadow: 0 0 16px rgba(255, 49, 49, .78); }
+    </style>
+  </head>
+  <body class="min-h-screen font-mono text-red-100 selection:bg-danger selection:text-black">
+    <main class="grid min-h-screen place-items-center px-5 py-16">
+      <section class="w-full max-w-4xl rounded-2xl border border-danger/50 bg-black/80 p-6 shadow-redGlow md:p-10" role="alert" aria-labelledby="panic-title">
+        <div class="mb-8 flex items-center justify-between border-b border-danger/30 pb-4 text-xs text-red-200/70">
+          <span>yacov.co.il recovery console</span>
+          <span>fault: 404</span>
+        </div>
+        <p class="panic text-sm uppercase tracking-[.45em] text-danger">Kernel Panic</p>
+        <h1 id="panic-title" class="panic mt-4 text-4xl font-black text-danger md:text-7xl">ACCESS DENIED</h1>
+        <pre class="mt-8 overflow-x-auto whitespace-pre-wrap rounded border border-danger/30 bg-red-950/10 p-5 text-sm leading-7 text-red-100/90">panic(cpu 0 caller 0x404): requested_path_not_found
+Debugger called: &lt;visitor attempted invalid route&gt;
+Backtrace:
+  0x000000404  route_lookup()
+  0x000000403  permission_check()
+  0x000000200  return_home()
+
+System message: The page you requested is missing, moved, or classified.
+Suggested recovery command: cd /</pre>
+        <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+          <a href="/" class="rounded border border-danger bg-danger px-6 py-3 text-center font-bold text-black transition hover:-translate-y-0.5">Return to safe mode</a>
+          <a href="mailto:moty@yacov.co.il" class="rounded border border-red-300/50 px-6 py-3 text-center text-red-100 transition hover:border-danger hover:text-danger">Report anomaly</a>
+        </div>
+        <p class="mt-8 text-sm text-red-200/70">cursor<span class="animate-blink text-danger">█</span></p>
+      </section>
+    </main>
+  </body>
+</html>
